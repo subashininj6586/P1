@@ -1,36 +1,32 @@
 import React, { useState } from 'react'
 
-const Statistics = (props) => {
- return(
-<div>
-<h2> Statistics</h2>
-<table><tbody>
-      <tr><td>Good  </td><td> {props.good}</td></tr>
-      <tr><td>Bad </td><td> {props.bad}</td></tr>
-      <tr><td>Neutral </td><td> {props.neutral}</td></tr>
-      <tr><td>All </td><td> {props.good+props.bad+props.neutral}</td></tr>
-      <tr><td>Average </td><td>{(props.good*1+props.bad*-1+props.neutral*0)/(props.good+props.bad+props.neutral)}</td></tr>
-      <tr><td>Positive</td><td>{props.good/(props.good+props.bad+props.neutral)*100}%</td></tr>
-      </tbody></table>
-</div>
- )
-}
 const App = () => {
-  
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  ]
+
+  const handleRandomClick = () => {
+    const rand = Math.floor(Math.random() * Math.floor(anecdotes.length));
+    
+    setSelected(rand);
+  }
+   
+  const [selected, setSelected] = useState(0)
 
   return (
     <div>
-      <h1> Give Feedback</h1>
-      <button onClick={()=>setGood(good+1)}>Good</button>
-      <button onClick={()=>setNeutral(neutral+1)}>Neutral</button>
-      <button onClick={()=>setBad(bad+1)}>Bad</button>
-      <Statistics good={good} bad={bad} neutral={neutral}/>
+      
+      {anecdotes[selected]}
+      <br>
+      </br>
+      <button onClick={handleRandomClick}>nextanecdote</button>
+
     </div>
   )
 }
-
-
 export default App
