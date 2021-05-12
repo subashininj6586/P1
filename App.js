@@ -11,28 +11,18 @@ const Condition = ({ good, neutral, bad, total, average, positive }) => {
   }
   return (
     <div>
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        total={total}
-        average={average}
-        positive={positive}
-      />
-
+     <p> <Statistics text="Good" value={good} /></p>
+     <p> <Statistics text="Neutral" value={neutral} /></p>
+     <p><Statistics text="Bad" value={bad} /></p>
+     <p><Statistics text="All" value={total} /></p>
+     <p> <Statistics text="Average" value={average} /></p>
+     <p><Statistics text="Positive" value={positive} /></p>
     </div>)
 }
-const Statistics = ({ good, neutral, bad, total, average, positive }) => {
+const Statistics = ({text , value }) => {
   return (
     <div>
-      <h2> Statistics</h2>
-
-      <p>Good = {good}</p>
-      <p>Bad = {bad}</p>
-      <p>Neutral = {neutral}</p>
-      <p>All = {total}</p>
-      <p>Average = {average}</p>
-      <p>Positive={positive}</p>
+      {text} : {value}
     </div>
   )
 }
