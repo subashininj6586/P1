@@ -25,32 +25,76 @@ function App() {
 
 import React, { useState } from 'react'
 
-const Statistics = (props) => {
+const Condition = ({good,neutral,bad,total,average,positive})=>
+{
+  if(total===0){
+  return(
+  <div>
+<h2> Statistics</h2>
+</div>)
+}
+return(
+<div>
+<Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={total}
+        average={average}
+        positive={positive}
+      />
+
+</div>)
+}
+const Statistics = ({good,neutral,bad,total,average,positive}) => {
  return(
 <div>
 <h2> Statistics</h2>
-      <p>Good = {props.good}</p>
-      <p>Bad = {props.bad}</p>
-      <p>Neutral = {props.neutral}</p>
-      <p>All = {props.good+props.bad+props.neutral}</p>
-      <p>Average = {(props.good*1+props.bad*-1+props.neutral*0)/(props.good+props.bad+props.neutral)}</p>
-      <p>Positive={props.good/(props.good+props.bad+props.neutral)*100}%</p>
+
+      <p>Good = {good}</p>
+      <p>Bad = {bad}</p>
+      <p>Neutral = {neutral}</p>
+      <p>All = {total}</p>
+      <p>Average = {average}</p>
+      <p>Positive={positive}</p>
 </div>
  )
 }
+
+
 const App = () => {
   
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const total = good+bad+neutral
+  const average=(good*1+bad*-1+neutral*0)/total
+  const positive=(good/total *100 )+"%"
+  
+  const handleGoodClick = () => {
+    
+    setGood(good + 1)
+  }
+  const handleBadClick = () => {
+    
+    setBad(bad + 1)
+  }
+  const handleNeutralClick = () => {
+    
+    setNeutral(neutral + 1)
+  }
   return (
     <div>
       <h1> Give Feedback</h1>
-      <button onClick={()=>setGood(good+1)}>Good</button>
-      <button onClick={()=>setNeutral(neutral+1)}>Neutral</button>
-      <button onClick={()=>setBad(bad+1)}>Bad</button>
-      <Statistics good={good} bad={bad} neutral={neutral}/>
+
+      <button onClick={handleGoodClick}>Good</button>
+      <button onClick={handleNeutralClick}>Neutral</button>
+      <button onClick={handleBadClick}>Bad</button>
+     
+      <Condition good={good} neutral={neutral} bad={bad} total={total} average={average} positive={positive}/>
+     
+      
     </div>
   )
 }
