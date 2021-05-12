@@ -4,12 +4,14 @@ const Statistics = (props) => {
  return(
 <div>
 <h2> Statistics</h2>
+<table><tbody>
       <tr><td>Good  </td><td> {props.good}</td></tr>
       <tr><td>Bad </td><td> {props.bad}</td></tr>
       <tr><td>Neutral </td><td> {props.neutral}</td></tr>
       <tr><td>All </td><td> {props.good+props.bad+props.neutral}</td></tr>
       <tr><td>Average </td><td>{(props.good*1+props.bad*-1+props.neutral*0)/(props.good+props.bad+props.neutral)}</td></tr>
       <tr><td>Positive</td><td>{props.good/(props.good+props.bad+props.neutral)*100}%</td></tr>
+      </tbody></table>
 </div>
  )
 }
